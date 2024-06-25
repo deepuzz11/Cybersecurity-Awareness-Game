@@ -3,41 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - DeepGuard Quest</title>
+    <title>Signup - DeepGuard Quest</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Sign Up</h1>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        <form method="post">
+        <h2>Signup</h2>
+        <form action="{{ url_for('signup') }}" method="post">
             <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" required>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="{{ name }}" required>
+                {% if errors.name %}
+                    <p class="error">{{ errors.name }}</p>
+                {% endif %}
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="{{ email }}" required>
+                {% if errors.email %}
+                    <p class="error">{{ errors.email }}</p>
+                {% endif %}
             </div>
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="{{ username }}" required>
+                {% if errors.username %}
+                    <p class="error">{{ errors.username }}</p>
+                {% endif %}
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
+                {% if errors.password %}
+                    <p class="error">{{ errors.password }}</p>
+                {% endif %}
             </div>
-            <button type="submit">Sign Up</button>
+            <button type="submit">Signup</button>
         </form>
-        <p>Already have an account? <a href="{{ url_for('login') }}">Log In</a></p>
     </div>
 </body>
 </html>
